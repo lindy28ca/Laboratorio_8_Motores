@@ -1,16 +1,23 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ColorPanel : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private Image ColorImage;
+    private void Awake()
     {
-        
+        ColorImage = GetComponent<Image>();
     }
-
-    // Update is called once per frame
-    void Update()
+    private void UpdateColor(Color newColor)
     {
-        
+        ColorImage.color = newColor;
+    }
+    private void OnEnable()
+    {
+        ColorObject.OnChangeColor += UpdateColor;
+    }
+    private void OnDisable()
+    {
+        ColorObject.OnChangeColor -= UpdateColor;
     }
 }

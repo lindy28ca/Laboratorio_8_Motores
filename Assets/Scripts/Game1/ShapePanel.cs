@@ -1,16 +1,23 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShapePanel : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private Image ColorImage;
+    private void Awake()
     {
-        
+       ColorImage = GetComponent<Image>();
     }
-
-    // Update is called once per frame
-    void Update()
+    private void UpdateShape(Sprite newSprite)
     {
-        
+        ColorImage.sprite = newSprite;    
+    }
+    private void OnEnable()
+    {
+        ShapeObject.OnChangeShape += UpdateShape; 
+    }
+    private void OnDisable()
+    {
+        ShapeObject.OnChangeShape -= UpdateShape;
     }
 }
